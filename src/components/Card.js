@@ -41,23 +41,23 @@ const Card = (props) => {
       e.target.textContent="favorite"
       //control data
       // console.log('id', e.target.parentNode.parentNode.parentNode.id)
-      let currentId =  e.target.parentNode.parentNode.parentNode.id;
+      // let currentId =  e.target.parentNode.parentNode.parentNode.id;
     
       // if(localStorage.getItem('myFavoirite')!== null){
       if(myList!== null){
 
         
         // let myFavoirite = JSON.parse(localStorage.getItem('myFavoirite'));
-        let myFavoirite = myList
+        let myFavorite = myList
 
-        if(currentId !=='')
-          myFavoirite.push(currentId);
-        localStorage.setItem('myFavoirite',JSON.stringify(myFavoirite));
+        // if(currentId !=='')
+        myFavorite.push(item);
+        localStorage.setItem('myFavorite',JSON.stringify(myFavorite));
       }else{
-        let myFavoirite = [];
-        if(currentId !=='')
-          myFavoirite.push(currentId);
-        localStorage.setItem('myFavoirite',JSON.stringify(myFavoirite));
+        let myFavorite = [];
+        // if(currentId !=='')
+        myFavorite.push(item);
+        localStorage.setItem('myFavorite',JSON.stringify(myFavorite));
       }
      
     } 
@@ -66,20 +66,26 @@ const Card = (props) => {
       e.target.textContent="favorite-border"
       //control data
       // console.log('id', e.target.parentNode.parentNode.parentNode.id)
-      let currentId =  e.target.parentNode.parentNode.parentNode.id;
+      // let currentId =  e.target.parentNode.parentNode.parentNode.id;
     
       // if(localStorage.getItem('myFavoirite')!== null){
       if(myList!== null){
         
         // let myFavoirite = JSON.parse(localStorage.getItem('myFavoirite'));
-        let myFavoirite = myList;
+        let myFavorite = myList;
 
-        if(currentId !==''){
-          let index = myFavoirite.indexOf(currentId);
-          myFavoirite.splice(index,1);
-        }
+        // if(currentId !==''){
+          //find 
+        //  let indexResult = myFavorite.filter(function(element, index){
+        //     return element.Id === item.Id? index:null;
+        // })
+        let indexResult = myFavorite.indexOf(item);
+        // console.log('delete ',indexResult)
+          // let index = myFavorite.indexOf(item.Id);
+          myFavorite.splice(indexResult,1);
+        // }
          
-        localStorage.setItem('myFavoirite',JSON.stringify(myFavoirite));
+        localStorage.setItem('myFavorite',JSON.stringify(myFavorite));
       }else{
         alert('程式有誤請聯絡管理員');
       }

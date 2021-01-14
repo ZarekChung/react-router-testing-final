@@ -128,7 +128,7 @@ return (
             </Route>
          
 
-            <Route path="/myfavorite"><LayoutPage><MyFavorite  currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} checkMyList={checkMyList} handleScrollTop={handleScrollTop}/>
+            <Route path="/myfavorite"><LayoutPage><MyFavorite currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} checkMyList={checkMyList} handleScrollTop={handleScrollTop}/>
             </LayoutPage>
             </Route>
            
