@@ -26,6 +26,8 @@ const App = () =>{
     currentZone:'請選擇行政區'
   });
   //分頁
+
+
   const [currentPage, setCurrentPage] = useState(1);//預設當前 page
   const [cardsPerPage] = useState(4);
   const [isDeafultPage, setIsDeafultPage] = useState(false);
@@ -120,7 +122,7 @@ const paginate = pageNumber => {
 return (
   <HashRouter>
           <Switch>
-            <Route exact path="/"><Layout getCurrentZone={getCurrentZone} itemZones= {itemZones}><Home currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} handleScrollTop={handleScrollTop}/>
+            <Route exact path="/"><Layout currentZone={currentZone} getCurrentZone={getCurrentZone} itemZones= {itemZones}><Home currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} handleScrollTop={handleScrollTop}/>
             </Layout>
             </Route>
          
