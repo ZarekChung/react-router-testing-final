@@ -9,12 +9,7 @@ const Card = (props) => {
 
   const [isFavorite,setIsFavorite] = useState(props.isFavorite);//based localstorage
   const {item,myFavoriteList} =  props;
-  console.log('item',item.Name);
-  console.log('isFavorite',isFavorite);
 
-  
-
-  
   const onLikeClick=(e) =>{
     e.preventDefault()
     
