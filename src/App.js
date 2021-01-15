@@ -29,7 +29,6 @@ const App = () =>{
   const [currentPage, setCurrentPage] = useState(1);//預設當前 page
   const [cardsPerPage] = useState(4);
   const [isDeafultPage, setIsDeafultPage] = useState(false);
-  const [checkMyList, setCheckMyList] = useState([]); //從 localStorage 撈出"加入我的最愛的 id"的資料，是一個陣列格式
 //API 資料
 // 初始值 (一載入網頁進來要做的事，因為後面是空陣列所以只為執行一次)
 useEffect(()=>{
@@ -49,12 +48,6 @@ useEffect(()=>{
           })
 
         });
-        //取出 localStorage 的資料
-        if((localStorage.getItem('myFavorite')!==null)){
-          setCheckMyList(JSON.parse(localStorage.getItem('myFavorite')));
-       
-        }
-
       },
       (sError) => {
         setState({
@@ -81,6 +74,9 @@ useEffect(()=>{
       window.removeEventListener("scroll", handleScroll);
     };
 },[]);
+
+
+
 
 // 1.fifter 篩選
 // 2.綁定 state >宣告變數給他一個空陣列
@@ -120,15 +116,16 @@ const paginate = pageNumber => {
  setCurrentPage(pageNumber);
 }
 
+
 return (
   <HashRouter>
           <Switch>
-            <Route exact path="/"><Layout getCurrentZone={getCurrentZone} itemZones= {itemZones}><Home currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} checkMyList={checkMyList} handleScrollTop={handleScrollTop}/>
+            <Route exact path="/"><Layout getCurrentZone={getCurrentZone} itemZones= {itemZones}><Home currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} handleScrollTop={handleScrollTop}/>
             </Layout>
             </Route>
          
 
-            <Route path="/myfavorite"><LayoutPage><MyFavorite currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} checkMyList={checkMyList} handleScrollTop={handleScrollTop}/>
+            <Route path="/myfavorite"><LayoutPage><MyFavorite  handleScrollTop={handleScrollTop}/>
             </LayoutPage>
             </Route>
            

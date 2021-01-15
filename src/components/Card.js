@@ -6,101 +6,55 @@ import tag from '../images/icons_tag.png'
 
 
 const Card = (props) => {
-  //isFavorite = true > add favorite already
-  //isFavorite = false > haven't added in  favorite list
+
   const [isFavorite,setIsFavorite] = useState(props.isFavorite);//based localstorage
-  // const [isFavorite,setIsFavorite] = useState(false);//based localstorage
-
-  const {item,myList} =  props;
-  // const checkMyList = JSON.parse(localStorage.getItem('myFavoirite'));
-
+  const {item,myFavoriteList} =  props;
   
-  // useEffect(()=>{
-  //   if(checkMyList!==null){
-  //     let checkIndex = checkMyList.indexOf(item.Id);
-  //     if(checkIndex !=null && checkIndex>=0){
-  //       setIsFavorite(true);
-  //       // console.log('isFavorite',isFavorite);
-  //     }
-  //   }
-    
-
-
-    
-  // },[item,checkMyList])
-
 
   const onLikeClick=(e) =>{
     e.preventDefault()
     
-    //1. check isFavorite 
+    //將未加入我的最愛>加入到我的最愛
     if (isFavorite === false) 
     {
-      //2. change style
-      //style
+      //style的樣式
       e.target.textContent="favorite"
-      //control data
-      // console.log('id', e.target.parentNode.parentNode.parentNode.id)
-      // let currentId =  e.target.parentNode.parentNode.parentNode.id;
-    
-      // if(localStorage.getItem('myFavoirite')!== null){
-      if(myList!== null){
-
-        
-        // let myFavoirite = JSON.parse(localStorage.getItem('myFavoirite'));
-        let myFavorite = myList
-
-        // if(currentId !=='')
-        myFavorite.push(item);
-        localStorage.setItem('myFavorite',JSON.stringify(myFavorite));
+     
+      //資料部分,判斷目前有無myFavoriteList存在
+      if(myFavoriteList!== null){       
+        myFavoriteList.push(item);
+        localStorage.setItem('myFavorite',JSON.stringify(myFavoriteList));
       }else{
-        let myFavorite = [];
-        // if(currentId !=='')
-        myFavorite.push(item);
-        localStorage.setItem('myFavorite',JSON.stringify(myFavorite));
+        let myNewFavorite = [];
+        myNewFavorite.push(item);
+        localStorage.setItem('myFavorite',JSON.stringify(myNewFavorite));
       }
      
     } 
-    else{
+    else{ //將已加入我的最愛>刪除我的最愛
+      
       //style
       e.target.textContent="favorite-border"
-      //control data
-      // console.log('id', e.target.parentNode.parentNode.parentNode.id)
-      // let currentId =  e.target.parentNode.parentNode.parentNode.id;
-    
-      // if(localStorage.getItem('myFavoirite')!== null){
-      if(myList!== null){
-        
-        // let myFavoirite = JSON.parse(localStorage.getItem('myFavoirite'));
-        let myFavorite = myList;
+      
+      //資料部分,判斷目前有無myFavoriteList存在
+      if(myFavoriteList!== null){
+        let indexResult = myFavoriteList.indexOf(item);//找出該筆的景點index
+          myFavoriteList.splice(indexResult,1);
 
-        // if(currentId !==''){
-          //find 
-        //  let indexResult = myFavorite.filter(function(element, index){
-        //     return element.Id === item.Id? index:null;
-        // })
-        let indexResult = myFavorite.indexOf(item);
-        // console.log('delete ',indexResult)
-          // let index = myFavorite.indexOf(item.Id);
-          myFavorite.splice(indexResult,1);
-        // }
-         
-        localStorage.setItem('myFavorite',JSON.stringify(myFavorite));
+        //將結果更新到localstorag  
+        localStorage.setItem('myFavorite',JSON.stringify(myFavoriteList));
+        //子組建呼叫父層的方法,更新myFavoriteList,重新渲染
+        props.updateCheckMyList(myFavoriteList);
       }else{
         alert('程式有誤請聯絡管理員');
       }
     }
     
-
-       
-   
-    //3. udate isFavorite
+    //upate isFavorite
     setIsFavorite(!isFavorite);
     
  }
     
-  // const {item} =  props;
-
   return(
     <li className="list-card" id={item.Id}>
       <div className="img" style={{backgroundImage: `url(${item.Picture1})`}}>
