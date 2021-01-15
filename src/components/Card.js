@@ -9,8 +9,12 @@ const Card = (props) => {
 
   const [isFavorite,setIsFavorite] = useState(props.isFavorite);//based localstorage
   const {item,myFavoriteList} =  props;
+  console.log('item',item.Name);
+  console.log('isFavorite',isFavorite);
+
   
 
+  
   const onLikeClick=(e) =>{
     e.preventDefault()
     
@@ -29,7 +33,7 @@ const Card = (props) => {
         myNewFavorite.push(item);
         localStorage.setItem('myFavorite',JSON.stringify(myNewFavorite));
       }
-     
+      props.updateCheckMyList(myFavoriteList);
     } 
     else{ //將已加入我的最愛>刪除我的最愛
       
@@ -38,7 +42,7 @@ const Card = (props) => {
       
       //資料部分,判斷目前有無myFavoriteList存在
       if(myFavoriteList!== null){
-        let indexResult = myFavoriteList.indexOf(item);//找出該筆的景點index
+        let indexResult = (myFavoriteList).map(function(e) { return e.Id; }).indexOf(item.Id);
           myFavoriteList.splice(indexResult,1);
 
         //將結果更新到localstorag  

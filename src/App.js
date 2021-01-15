@@ -83,13 +83,9 @@ useEffect(()=>{
 // 1.fifter 篩選
 // 2.綁定 state >宣告變數給他一個空陣列
 const getCurrentZone =(zone) =>{
-  // console 第一個變數 'getCurrentZone' 代表是子層傳給父層撈到的值(第一個變數好辨認是哪邊產生的值)
-  // console.log('getCurrentZone',zone);
   
-  // 在 getCurrentZone function 中，cardsByZone 在跑完 filter 後狀態會改變
   setCurrentPage(1); //修正分頁 bug:讓每一次點選新景點分頁預設值都是第一頁
   setIsDeafultPage(true);
-   // console.log('setIsDefaultChange',isDefaultChange);
   setState({
       ...state, // keep 住當前的狀態 ask!
       currentZone:zone,

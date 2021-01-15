@@ -13,9 +13,12 @@ const Home = (props) =>{
 
     //第一次進來讀取localstorage
     useEffect(()=>{ 
-      setCheckMyList({
-        myFavoriteList: JSON.parse(localStorage.getItem('myFavorite'))
-      });
+      if(JSON.parse(localStorage.getItem('myFavorite'))!==null){
+        setCheckMyList({
+          myFavoriteList: JSON.parse(localStorage.getItem('myFavorite'))
+        });
+      }
+     
     },[]);
     //父組建伸出的手,讓子組建呼叫,去更新父層的myFavoriteList
     //NewList適當user刪除的某個景點後的資料
@@ -33,13 +36,9 @@ const Home = (props) =>{
             <ul className="list">
                 {/* 因為新增分頁功能所以要改成 currentCards */}
             {currentCards.map(function(card){
-              if(checkMyList.myFavoriteList!=null && checkMyList.myFavoriteList.map(function(e){return e.Id}).indexOf(card.Id)>=0){
-                
-                  return<Card key={card.Id} item={card} isFavorite={true}  myFavoriteList={checkMyList.myFavoriteList} updateCheckMyList={updateCheckMyList}/>
-                }else{
-                  return<Card key={card.Id} item={card} isFavorite={false} myFavoriteList={checkMyList.myFavoriteList} updateCheckMyList={updateCheckMyList}/>
-                }
-                  // 通常 map 要加上 key (固定值)
+              let index = (checkMyList.myFavoriteList).map(function(e) { return e.Id; }).indexOf(card.Id);
+              return<Card key={card.Id} item={card} isFavorite={index>=0}  myFavoriteList={checkMyList.myFavoriteList} updateCheckMyList={updateCheckMyList}/>
+             
             })}
             </ul>
         </div>
