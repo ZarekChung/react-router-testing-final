@@ -24,14 +24,17 @@ const MyFavorite = (props) =>{
       myFavoriteList: NewList
     });
   }
+
+  const myFavoriteList = checkMyList.myFavoriteList;//為了方便直接宣告一個新的myFavoriteList
   return (
     <div className="content container"> 
         <div className="main">
+        <h2 className="title-main">{myFavoriteList.length > 0 ? "我的最愛":"尚未加入我的最愛"}</h2>
          
             <ul className="list">
-            {checkMyList.myFavoriteList.map(function(card){  
+            {myFavoriteList.map(function(card){  
                //將本來myList的props改成myFavoriteList,比較好懂
-               return<Card key={card.Id} item={card} isFavorite={true} myFavoriteList={checkMyList.myFavoriteList} updateCheckMyList={updateCheckMyList}/>
+               return<Card key={card.Id} item={card} isFavorite={true} myFavoriteList={myFavoriteList} updateCheckMyList={updateCheckMyList}/>
             })}
             </ul>
         </div>
