@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import gotopIcon from '../images/btn_goTop.png'
 import Pagination from '../components/Pagination';
 import Card from '../components/Card';
@@ -8,18 +8,9 @@ const Home = (props) =>{
     
     //將checkMyList改成state,myFavoriteList是讀取我的最愛的資料
     const [checkMyList, setCheckMyList] = useState({
-      myFavoriteList:[]
+      myFavoriteList: localStorage.getItem('myFavorite')!==null ? JSON.parse(localStorage.getItem('myFavorite')):[]
     }); 
 
-    //第一次進來讀取localstorage
-    useEffect(()=>{ 
-      if(JSON.parse(localStorage.getItem('myFavorite'))!==null){
-        setCheckMyList({
-          myFavoriteList: JSON.parse(localStorage.getItem('myFavorite'))
-        });
-      }
-     
-    },[]);
     //父組建伸出的手,讓子組建呼叫,去更新父層的myFavoriteList
     //NewList適當user刪除的某個景點後的資料
     const updateCheckMyList = (NewList)=>{
@@ -27,7 +18,8 @@ const Home = (props) =>{
         myFavoriteList: NewList
       });
     }
-
+  
+    const myFavoriteList = checkMyList.myFavoriteList!=null?checkMyList.myFavoriteList:[];//為了方便直接宣告一個新的myFavoriteList
     
   return (
     <div className="content container"> 
@@ -36,8 +28,8 @@ const Home = (props) =>{
             <ul className="list">
                 {/* 因為新增分頁功能所以要改成 currentCards */}
             {currentCards.map(function(card){
-              let index = (checkMyList.myFavoriteList).map(function(e) { return e.Id; }).indexOf(card.Id);
-              return<Card key={card.Id} item={card} isFavorite={index>=0}  myFavoriteList={checkMyList.myFavoriteList} updateCheckMyList={updateCheckMyList}/>
+              let index = (myFavoriteList).map(function(e) { return e.Id; }).indexOf(card.Id);
+              return<Card key={card.Id} item={card} isFavorite={index>=0}  myFavoriteList={myFavoriteList} updateCheckMyList={updateCheckMyList}/>
              
             })}
             </ul>

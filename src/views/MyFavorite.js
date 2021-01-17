@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import gotopIcon from '../images/btn_goTop.png'
 // import Pagination from '../components/Pagination';
 import Card from '../components/Card';
@@ -6,17 +6,10 @@ import Card from '../components/Card';
 
 const MyFavorite = (props) =>{
     const {handleScrollTop} =  props;
-    //將checkMyList改成state,myFavoriteList是讀取我的最愛的資料
     const [checkMyList, setCheckMyList] = useState({
-      myFavoriteList:[]
+      myFavoriteList: localStorage.getItem('myFavorite')!==null ? JSON.parse(localStorage.getItem('myFavorite')):[]
     }); 
-    //第一次進來讀取localstorage
-    useEffect(()=>{ 
-      setCheckMyList({
-        myFavoriteList: JSON.parse(localStorage.getItem('myFavorite'))
-      });
-    },[]);
-
+    
    //父組建伸出的手,讓子組建呼叫,去更新父層的myFavoriteList
    //NewList適當user刪除的某個景點後的資料 
   const updateCheckMyList = (NewList)=>{
@@ -25,11 +18,11 @@ const MyFavorite = (props) =>{
     });
   }
 
-  const myFavoriteList = checkMyList.myFavoriteList;//為了方便直接宣告一個新的myFavoriteList
+  const myFavoriteList = checkMyList.myFavoriteList!=null?checkMyList.myFavoriteList:[];//為了方便直接宣告一個新的myFavoriteList
   return (
     <div className="content container"> 
         <div className="main">
-        <h2 className="title-main">{myFavoriteList.length > 0 ? "我的最愛":"尚未加入我的最愛"}</h2>
+        <h2 className= "title-main">{myFavoriteList.length > 0 ? "我的最愛":"尚未加入我的最愛"}</h2>
          
             <ul className="list">
             {myFavoriteList.map(function(card){  
@@ -45,7 +38,7 @@ const MyFavorite = (props) =>{
       
         {/* <Pagination
         cardsPerPage={cardsPerPage}
-        totalCards={cardsByZone.length}
+        totalCards={myFavoriteList.length}
         paginate={paginate}
         isDeafultPage = {isDeafultPage} /> */}
     </div>

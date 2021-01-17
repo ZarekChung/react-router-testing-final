@@ -1,11 +1,11 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 const Dropdown = (props) =>{
   const {itemZones} =  props;
 
   //6-10行都是為了要接App丟進來的區域,是由button選到的
   const [currenZone,setCurrentZone] = useState({zone:''});
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrentZone({zone:props.currentZone});
   }, [props.currentZone])
 
@@ -16,7 +16,7 @@ const Dropdown = (props) =>{
     props.getZone(e.target.value);
 
     //當點選下拉選單的時候,將button傳進來的currenZone的地區清空,這樣下拉選單才能選到正確的地區
-    setCurrentZone({zone:''})
+    // setCurrentZone({zone:''})
   }
 
   return(

@@ -349,10 +349,10 @@ header hr{
     /* color:white; */
 }
 
-.page a:focus{
+/* .page a:focus{
     background: #8A82CC;
     color:white;
-}
+} */
 
 .page .active{
     background: #8A82CC;
