@@ -5,18 +5,12 @@ const Buttons = (props) =>{
   const { 
     color,
     content,
-    // ...Props
+    getCurrentZone
   } = props;
   
-  const onButtonClick=(e) =>{
-     //抓到當下選得值
-    // console.log('onButtonClick',e.target.value);
-    props.getZone(e.target.value);
-  }
+
   return (
-    // <button>{this.props.text} </button>
-    // <button className={color} {...Props} onClick={() => alert(color)}>
-    <button type="button" className={color} onClick={onButtonClick} value={content}>
+    <button type="button" className={color} onClick={(event) => getCurrentZone(event)} value={content}>
     {content}
     </button>  
   );  

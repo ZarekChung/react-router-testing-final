@@ -89,16 +89,17 @@ const { itemZones,cardsByZone,currentZone,} = zone;
 
 // 1.fifter 篩選
 // 2.綁定 state >宣告變數給他一個空陣列
-const getCurrentZone =(currentZone) =>{
+const getCurrentZone =(e) =>{
   
+
   setCurrentPage(1); //修正分頁 bug:讓每一次點選新景點分頁預設值都是第一頁
 
   setZone({
     ...zone, // keep 住當前的狀態 ask!
-    currentZone:currentZone,
+    currentZone:e.target.value,
     // element 是一個物件，cardsByZone 是一個新陣列 物件
     cardsByZone: cards.filter(function(element){
-        return element.Zone === currentZone;
+        return element.Zone === e.target.value;
     })
 
   });  
@@ -108,6 +109,7 @@ const getCurrentZone =(currentZone) =>{
 const handleScrollTop =(e)=>{
   document.documentElement.scrollTop =0;
 }
+
 
 
 //分頁處理
