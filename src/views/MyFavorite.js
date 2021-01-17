@@ -9,7 +9,6 @@ const MyFavorite = (props) =>{
       //分頁
     const [currentPage, setCurrentPage] = useState(1);//預設當前 page
     const [cardsPerPage] = useState(4);
-    const [isDeafultPage, setIsDeafultPage] = useState(false);
     
     const [checkMyList, setCheckMyList] = useState({
       myFavoriteList: localStorage.getItem('myFavorite')!==null ? JSON.parse(localStorage.getItem('myFavorite')):[]
@@ -32,7 +31,6 @@ const MyFavorite = (props) =>{
 
   // Change page
   const paginate = pageNumber => {
-    setIsDeafultPage(false);
     setCurrentPage(pageNumber);
   }
 
@@ -58,7 +56,7 @@ const MyFavorite = (props) =>{
         cardsPerPage={cardsPerPage}
         totalCards={myFavoriteList.length}
         paginate={paginate}
-        isDeafultPage = {isDeafultPage} />
+        currentPage ={currentPage}/>
     </div>
   
   );

@@ -33,7 +33,6 @@ const App = () =>{
   //分頁
   const [currentPage, setCurrentPage] = useState(1);//預設當前 page
   const [cardsPerPage] = useState(4);
-  const [isDeafultPage, setIsDeafultPage] = useState(false);
 
 //API 資料
 // 初始值 (一載入網頁進來要做的事，因為後面是空陣列所以只為執行一次)
@@ -93,7 +92,6 @@ const { itemZones,cardsByZone,currentZone,} = zone;
 const getCurrentZone =(currentZone) =>{
   
   setCurrentPage(1); //修正分頁 bug:讓每一次點選新景點分頁預設值都是第一頁
-  setIsDeafultPage(true);
 
   setZone({
     ...zone, // keep 住當前的狀態 ask!
@@ -119,7 +117,6 @@ const currentCards = cardsByZone.slice(indexOfFirstCard, indexOfLastCard);//slic
 
 // Change page
 const paginate = pageNumber => {
- setIsDeafultPage(false);
  setCurrentPage(pageNumber);
 }
 
@@ -127,7 +124,7 @@ const paginate = pageNumber => {
 return (
   <HashRouter>
           <Switch>
-            <Route exact path="/"><Layout currentZone={currentZone} getCurrentZone={getCurrentZone} itemZones= {itemZones}><Home currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate} isDeafultPage={isDeafultPage} handleScrollTop={handleScrollTop}/>
+            <Route exact path="/"><Layout currentZone={currentZone} getCurrentZone={getCurrentZone} itemZones= {itemZones}><Home currentZone={currentZone} currentCards={currentCards} cardsByZone={cardsByZone} cardsPerPage={cardsPerPage} paginate={paginate}  currentPage ={currentPage} handleScrollTop={handleScrollTop}/>
             </Layout>
             </Route>
          

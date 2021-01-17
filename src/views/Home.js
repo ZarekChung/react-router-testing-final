@@ -4,7 +4,7 @@ import Pagination from '../components/Pagination';
 import Card from '../components/Card';
 
 const Home = (props) =>{
-    const {currentZone,currentCards,cardsByZone,cardsPerPage,paginate,isDeafultPage,handleScrollTop} =  props;
+    const {currentZone,currentCards,cardsByZone,currentPage,cardsPerPage,paginate,handleScrollTop} =  props;
     
     //將checkMyList改成state,myFavoriteList是讀取我的最愛的資料
     const [checkMyList, setCheckMyList] = useState({
@@ -43,7 +43,7 @@ const Home = (props) =>{
         cardsPerPage={cardsPerPage}
         totalCards={cardsByZone.length}
         paginate={paginate}
-        isDeafultPage = {isDeafultPage} />
+        currentPage ={currentPage}/>
     </div>
   
   );
